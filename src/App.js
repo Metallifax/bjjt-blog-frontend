@@ -1,24 +1,15 @@
-import BlogEditor from './components/BlogEditor';
-import { useState } from 'react';
-import { EditorState } from 'draft-js';
-import DisplayMarkupFromEditor from './components/DisplayMarkupFromEditor';
+import BlogEditor from './components/editor/BlogEditor';
+import DisplayMarkupFromEditor from './components/editor/DisplayMarkupFromEditor';
+import store from './store';
+import { Provider } from 'react-redux';
 
 const App = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
-
-  const pullEditorStateData = (data) => {
-    setEditorState(data);
-  };
-
   return (
-    <>
-      <h1>React Editors</h1>
-      <h2>Start editing to see some magic happen!</h2>
-      <BlogEditor editorStateData={pullEditorStateData} />
-      <DisplayMarkupFromEditor editorState={editorState} />
-    </>
+    <Provider store={store}>
+      <h1>Editor Test</h1>
+      <BlogEditor />
+      <DisplayMarkupFromEditor />
+    </Provider>
   );
 };
 

@@ -2,15 +2,19 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { useEffect, useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useDispatch } from 'react-redux';
+import { update } from '../../features/editor/editorSlice';
 
-const BlogEditor = ({ editorStateData }) => {
+const BlogEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    editorStateData(editorState);
-  }, [editorState, editorStateData]);
+    dispatch(update(editorState));
+  }, [editorState, dispatch]);
 
   return (
     <div
