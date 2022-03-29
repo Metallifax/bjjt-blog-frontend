@@ -1,0 +1,15 @@
+@import "../../index";
+
+.footer {
+  background-color: $primary;
+  position: fixed;
+  bottom: 0;
+  padding: 15px;
+  left: 0;
+  width: 100%;
+
+  &--text {
+   text-align: center;
+    margin: 0 auto;
+  }
+}

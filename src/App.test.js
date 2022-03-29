@@ -13,13 +13,7 @@ describe('App tests', () => {
       }),
   });
 
-  test('renders the title of the application', () => {
-    renderWithRouter(<App />);
-    const linkElement = screen.getByText('Welcome to The App!');
-    expect(linkElement).toBeInTheDocument();
-  });
-
-  test('renders home page on url change', () => {
+  test('renders home page on render', () => {
     renderWithRouter(<App />);
     expect(screen.getByText(/home!/i)).toBeInTheDocument();
   });
