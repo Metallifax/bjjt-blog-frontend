@@ -24,7 +24,11 @@ const BlogEditor = () => {
         minHeight: '400px',
       }}
     >
-      <Editor editorState={editorState} onEditorStateChange={setEditorState} />
+      <Editor
+        data-testid='editor'
+        editorState={editorState}
+        onEditorStateChange={setEditorState}
+      />
     </div>
   );
 };
