@@ -1,4 +1,4 @@
-@import "../../index";
+@import '../../index';
 
 .footer {
   background-color: $primary;
@@ -9,7 +9,7 @@
   width: 100%;
 
   &--text {
-   text-align: center;
+    text-align: center;
     margin: 0 auto;
   }
 }
