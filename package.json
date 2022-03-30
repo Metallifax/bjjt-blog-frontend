@@ -31,12 +31,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write src"
+    "format": "prettier --write",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -52,6 +54,8 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^9.5.3",
+    "eslint-plugin-cypress": "^2.12.1",
     "prettier": "^2.6.1"
   }
 }
