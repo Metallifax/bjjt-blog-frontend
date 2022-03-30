@@ -18,20 +18,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-      - run: npm install
-      - run: npm run format
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply formatting changes
-          branch: ${{ github.head_ref }}
-      - run: npm test
-      - name: Cypress run
+
+      - name: Install Node packages
+        run: npm install
+
+      - name: Run linting with ESLint
+        run: npm run lint
+
+      - name: Run formatting check with Prettier
+        run: npm run format
+
+      - name: Run testing suite with Jest and React Testing Library
+        run: npm test
+
+      - name: Run headless e2e testing using Cypress and save the testing data to Cypress.io
         uses: cypress-io/github-action@v2
         with:
           browser: chrome

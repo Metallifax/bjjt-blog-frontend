@@ -29,6 +29,7 @@ describe('test the layout of the application', () => {
     expect(editorLink).toHaveClass('active');
   });
 
+  // eslint-disable-next-line max-len
   it('when clicking editor, then home, home link should have active class', () => {
     renderWithRouter(<Layout />);
     const homeLink = screen.getByText('Home');

@@ -1,6 +1,6 @@
 const devRoute = 'http://localhost:3000';
 
-function checkNavbar() {
+const checkNavbar = () => {
   cy.get('nav')
     .should('be.visible')
     .within(() => {
@@ -11,15 +11,15 @@ function checkNavbar() {
       cy.get('a').contains('About').should('contain.text', 'About');
       cy.get('a').contains('Editor').should('contain.text', 'Editor');
     });
-}
+};
 
-function checkFooter() {
+const checkFooter = () => {
   cy.get('div')
     .should('be.visible')
     .within(() => {
       cy.get('p').should('contain.text', 'Brazil Japan Joint Team 2022 ©');
     });
-}
+};
 
 describe('end to end test', () => {
   describe('smoke test', () => {

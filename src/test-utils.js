@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import editorReducer from './features/editor/editorSlice';
 import { BrowserRouter } from 'react-router-dom';
 
-function render(
+const render = (
   ui,
   {
     preloadedState,
@@ -19,13 +19,13 @@ function render(
     }),
     ...renderOptions
   } = {},
-) {
-  function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>;
-  }
+) => {
+  const Wrapper = ({ children }) => (
+    <Provider store={store}>{children}</Provider>
+  );
 
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-}
+};
 
 const renderWithRouter = (ui, { route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route);

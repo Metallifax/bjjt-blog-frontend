@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "react-app",
+    "react-app/jest",
+    "plugin:cypress/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "prefer-arrow-functions"
+  ],
+  "rules": {
+    "prettier/prettier": "warn",
+    "prefer-arrow-functions/prefer-arrow-functions": "error",
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "ignoreUrls": true
+      }
+    ],
+    "prefer-arrow-callback": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ]
+  }
+}

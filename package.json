@@ -31,17 +31,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write src && prettier --write cypress",
+    "format": "prettier -c src && prettier -c cypress",
+    "lint": "eslint src/ && eslint cypress/",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:sr": "start-test 3000 cy:run"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:cypress/recommended"
-    ]
   },
   "browserslist": {
     "production": [
@@ -57,7 +51,12 @@
   },
   "devDependencies": {
     "cypress": "^9.5.3",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-prefer-arrow-functions": "^3.1.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.1",
     "start-server-and-test": "^1.14.0"
   }
