@@ -32,7 +32,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write src && prettier --write cypress",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:sr": "start-test 3000 cy:run"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +58,7 @@
   "devDependencies": {
     "cypress": "^9.5.3",
     "eslint-plugin-cypress": "^2.12.1",
-    "prettier": "^2.6.1"
+    "prettier": "^2.6.1",
+    "start-server-and-test": "^1.14.0"
   }
 }

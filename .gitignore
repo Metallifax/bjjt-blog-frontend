@@ -24,7 +24,5 @@ yarn-error.log*
 
 # user generated
 .idea
-package-lock.json
-yarn.lock
 cypress/screenshots
 cypress/videos
