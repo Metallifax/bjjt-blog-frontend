@@ -84,8 +84,8 @@ quit.
 
 ## Run Formatting Check via Prettier
 
-This project uses Prettier to enforcement formatting rules. To do a check of both directories of interest, 
-namely the `src/` and `cypress/` dirs, run this command in terminal
+This project uses Prettier to enforce formatting rules. To do a check of both directories of interest, 
+namely the `src/` and `cypress/`, run this command in terminal
 
 `npm run format` or `yarn format`
 
