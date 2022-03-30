@@ -32,7 +32,7 @@ jobs:
           branch: ${{ github.head_ref }}
       - run: npm test
       - name: Cypress run
-        uses: cypress-io/github-actions@v2
+        uses: cypress-io/github-action@v2
         with:
           browser: chrome
           headless: true
