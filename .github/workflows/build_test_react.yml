@@ -31,3 +31,14 @@ jobs:
           commit_message: Apply formatting changes
           branch: ${{ github.head_ref }}
       - run: npm test
+      - name: Cypress run
+        uses: cypress-io/github-actions@v2
+        with:
+          browser: chrome
+          headless: true
+          record: true
+          start: npm start
+          wait-on: http://localhost:3000
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
