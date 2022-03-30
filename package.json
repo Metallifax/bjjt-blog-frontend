@@ -30,12 +30,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-all": "npm run format && npm run lint && npm test -- --watchAll=false && npm run cy:sr",
     "eject": "react-scripts eject",
     "format": "prettier -c src && prettier -c cypress",
     "lint": "eslint src/ && eslint cypress/",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:sr": "start-test 3000 cy:run"
+    "cy:sr": "start-test 3000 cy:run",
+    "cy:so": "start-test 3000 cy:open"
   },
   "browserslist": {
     "production": [

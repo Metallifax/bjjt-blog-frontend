@@ -1,70 +1,110 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Brazil Japan Joint Team Blogging App
 
-## Available Scripts
 
-In the project directory, you can run:
+![workflow](https://github.com/Metallifax/bjjt-blog-frontend/actions/workflows/build_test_react.yml/badge.svg)
 
-### `npm start`
+A simple front-end for a full stack blogging application that uses [React](https://reactjs.org/) as the 
+UI library. Very work in progress and we're not sure what the back-end will be yet. A future version 
+of this application will have user login, authentication and possibly a news-feed of bloggers that you are 
+subscribed to.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![very early screen shot of the application](screens/github-screen.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup for Local Development
 
-### `npm run build`
+To clone the repository, run `git clone https://github.com/metallifax/bjjt-blog-frontend` in your
+terminal
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+then change into the repository directory with `cd bjjt-blog-frontend`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Finally, if you use Node Package Manager, type `npm i` or `npm install` in your terminal, 
+or if you use Yarn, just type `yarn` and run.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the project
 
-### `npm run eject`
+To start a development server that opens up in your default browser, type `npm start` or `yarn start`. 
+If for some reason the development server doesn't automatically open, just visit `http://localhost:3000` 
+in your browser to view the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running All Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This command will run all tests using all testing methods currently available in the project, 
+which includes [ESLint](https://eslint.org/), [Prettier](https://prettier.io/), 
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), 
+and [Cypress](https://www.cypress.io/), all of which run in the console and will start up and shut down 
+the server upon finishing the tests by leveraging 
+[start-server-and-test](https://github.com/bahmutov/start-server-and-test). To run, simply type this in 
+your terminal 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`npm run test-all` or `yarn test-all`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## End-to-End Testing /w Cypress
 
-## Learn More
+### Via the Cypress Open Command
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To do end-to-end testing using Cypress and the built-in GUI, type:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm run cy:so` or `yarn cy:so`
 
-### Code Splitting
+Then when the Cypress Test GUI opens, click on the test you would like to run
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Cypress example](screens/cypress-test-example.png)
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+A new window displaying the application will pop up and automatically run the selected E2E suite.
 
-### Making a Progressive Web App
+![Running the Cypress test](screens/cypress-run-test-example.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### Via the Cypress Run Command
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Cypress offers the ability to do headless testing without the use of GUI. 
+This will also need a running server in order for the test to run, but the results 
+are the same and useful for remote testing. Just type 
 
-### Deployment
+`npm run cy:sr` or `yarn cy:sr` and the testing will take place in console.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Run Unit Tests with React Testing Library
 
-### `npm run build` fails to minify
+React projects are created with React Testing Library already installed in the project. Simply type
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm test -- --watchAll=false` or `yarn test -- --watchAll=false` 
+
+to run a Jest a single time or
+
+`npm test` or `yarn test` to run Jest in watch mode, then press 'a' to run all tests or press 'q' to
+quit.
+
+## Run Formatting Check via Prettier
+
+This project uses Prettier to enforcement formatting rules. To do a check of both directories of interest, 
+namely the `src/` and `cypress/` dirs, run this command in terminal
+
+`npm run format` or `yarn format`
+
+## Run Linting Check via ESLint
+
+This project uses ESLint as the linting tool to enforce styling rules, such as arrow functions over classic 
+functions. To do a check of directories of interest, run this command in terminal
+
+`npm run lint` or `yarn lint`
+
+<br>
+
+---
+
+## Contributing
+
+If you found this project in the ether somehow and would like to work on it, we're not open to outside help just yet, 
+but I can see this project being a great way for new React developers to help out and make some beautiful UI. 
+Feel free to open an issue before making a pull-request, and we can talk about where we think we're going to go with 
+this application. Thank you for your interest.
+
+<br>
