@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-all": "npm run format && npm run lint && npm test -- --watchAll=false && npm run cy:sr",
+    "test-cov": "npm test -- --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "format": "prettier -c src && prettier -c cypress",
     "lint": "eslint src/ && eslint cypress/",
