@@ -40,6 +40,9 @@
     "cy:sr": "start-test 3000 cy:run",
     "cy:so": "start-test 3000 cy:open"
   },
+  "jest": {
+    "collectCoverageFrom": ["<rootDir>/src/**/*.jsx"]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
