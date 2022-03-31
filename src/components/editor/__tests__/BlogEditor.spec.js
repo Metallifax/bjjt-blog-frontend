@@ -1,8 +1,8 @@
 import React from 'react';
-import { renderWithRouter, screen } from '../../test-utils';
-import BlogEditor from './BlogEditor';
+import { renderWithRouter, screen } from '../../../test-utils';
+import BlogEditor from '../BlogEditor';
 import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '../../features/editor/editorSlice';
+import editorReducer from '../../../features/editor/editorSlice';
 import { Provider } from 'react-redux';
 
 describe('BlogEditor component tests', () => {

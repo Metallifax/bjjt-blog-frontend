@@ -1,5 +1,5 @@
-import { renderWithRouter, screen } from '../../test-utils';
-import Layout from './Layout';
+import { renderWithRouter, screen } from '../../../test-utils';
+import Layout from '../Layout';
 import { fireEvent } from '@testing-library/react';
 
 describe('test the layout of the application', () => {
