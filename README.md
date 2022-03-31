@@ -4,6 +4,8 @@
 
 ![workflow](https://github.com/Metallifax/bjjt-blog-frontend/actions/workflows/build_test_react.yml/badge.svg)
 
+[![codecov](https://codecov.io/gh/Metallifax/bjjt-blog-frontend/branch/master/graph/badge.svg?token=CL2Y0TODNS)](https://codecov.io/gh/Metallifax/bjjt-blog-frontend)
+
 A simple front-end for a full stack blogging application that uses [React](https://reactjs.org/) as the 
 UI library. Very work in progress and we're not sure what the back-end will be yet. A future version 
 of this application will have user login, authentication and possibly a news-feed of bloggers that you are 
