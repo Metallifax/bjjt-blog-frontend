@@ -43,6 +43,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
 
       - name: Run headless e2e testing using Cypress and save the testing data to Cypress.io
