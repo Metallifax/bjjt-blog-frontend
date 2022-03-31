@@ -12,6 +12,10 @@ on:
 jobs:
   build_test:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x, 16.x]
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -19,10 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node
+      - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: ${{ matrix.node-version }}
 
       - name: Install Node packages
         run: npm install
@@ -34,7 +38,12 @@ jobs:
         run: npm run format
 
       - name: Run testing suite with Jest and React Testing Library
-        run: npm test
+        run: npm run test-cov
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true
 
       - name: Run headless e2e testing using Cypress and save the testing data to Cypress.io
         uses: cypress-io/github-action@v2
