@@ -14,7 +14,11 @@ describe('App tests', () => {
   });
 
   test('renders home page on render', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    );
     expect(screen.getByText(/home!/i)).toBeInTheDocument();
   });
 

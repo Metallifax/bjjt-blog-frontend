@@ -20,8 +20,10 @@ const BlogEditor = () => {
   }, [editorState, dispatch]);
 
   const savePostHandler = () => {
-    dispatch(save(editorState));
-    navigate('/');
+    if (editorState.getCurrentContent().getPlainText()) {
+      dispatch(save(editorState));
+      navigate('/');
+    }
   };
 
   return (
