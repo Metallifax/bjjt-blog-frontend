@@ -1,10 +1,6 @@
 
 # Brazil Japan Joint Team Blogging App
-
-
-![workflow](https://github.com/Metallifax/bjjt-blog-frontend/actions/workflows/build_test_react.yml/badge.svg)
-
-[![codecov](https://codecov.io/gh/Metallifax/bjjt-blog-frontend/branch/master/graph/badge.svg?token=CL2Y0TODNS)](https://codecov.io/gh/Metallifax/bjjt-blog-frontend)
+![workflow](https://github.com/Metallifax/bjjt-blog-frontend/actions/workflows/build_test_react.yml/badge.svg) [![codecov](https://codecov.io/gh/Metallifax/bjjt-blog-frontend/branch/master/graph/badge.svg?token=CL2Y0TODNS)](https://codecov.io/gh/Metallifax/bjjt-blog-frontend) [![blog-frontend](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/wf54vp/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/wf54vp/runs)
 
 A simple front-end for a full stack blogging application that uses [React](https://reactjs.org/) as the 
 UI library. Very work in progress and we're not sure what the back-end will be yet. A future version 
