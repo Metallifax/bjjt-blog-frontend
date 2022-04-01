@@ -1,6 +1,6 @@
 const About = () => (
   <>
-    <h1>About!</h1>
+    <h1 className='text-center m-3'>About!</h1>
   </>
 );
 
