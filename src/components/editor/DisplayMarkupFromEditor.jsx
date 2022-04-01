@@ -1,13 +1,12 @@
-import { convertToRaw } from 'draft-js';
+import { convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import SanitizedHtml from '../utils/SanitizedHtml';
-import { useSelector } from 'react-redux';
 
-const DisplayMarkupFromEditor = () => {
-  const editorData = useSelector((state) => state.editor.value);
-
+const DisplayMarkupFromEditor = ({
+  editorData = EditorState.createEmpty(),
+}) => {
   return (
-    <div style={{ marginTop: 20 }}>
+    <div style={{ marginTop: 20 }} data-testid='display-markup'>
       <SanitizedHtml
         dirtyHtml={draftToHtml(convertToRaw(editorData.getCurrentContent()))}
       />

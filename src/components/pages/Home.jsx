@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const posts = useSelector((state) => state.editor.posts);
 
-  const getPosts = () => {
-    return posts.map((post) => {
+  const getPosts = (postsArr) => {
+    return postsArr.map((post) => {
       const textArr = post.getCurrentContent().getPlainText().split(' ', 25);
 
       return (
@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <>
       <h1>Home!</h1>
-      <ul>{getPosts()}</ul>
+      <ul>{posts && getPosts(posts)}</ul>
     </>
   );
 };
