@@ -10,31 +10,85 @@ import './BlogEditor.scss';
 import FormInput from '../widgets/FormInput';
 
 const BlogEditor = () => {
-  const [title, setTitle] = useState('');
-  const [name, setName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
+    EditorState.createWithText('Enter here to create your post!'),
   );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [form, setForm] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const findFormErrors = () => {
+    const { name, title, imageUrl } = form;
+    const newErrors = {};
+    const editorText = editorState.getCurrentContent().getPlainText();
+
+    // name errors
+    if (!name || name === '') newErrors.name = 'Cannot be blank';
+
+    // title errors
+    if (!title || title === '') newErrors.title = 'Cannot be blank';
+
+    // imageUrl
+    if (!imageUrl || imageUrl === '') newErrors.imageUrl = 'Cannot be blank';
+
+    if (!editorText || editorText === '') newErrors.editor = 'Cannot be blank';
+
+    return newErrors;
+  };
+
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+
+    if (errors[field])
+      setErrors({
+        ...errors,
+        [field]: null,
+      });
+  };
 
   useEffect(() => {
     dispatch(update(editorState));
   }, [editorState, dispatch]);
 
-  const savePostHandler = () => {
-    if (editorState.getCurrentContent().getPlainText()) {
-      const post = {
-        name,
-        title,
-        imageUrl,
-        editorState,
-      };
+  const changeTitleHandler = (e) => {
+    setField('title', e.target.value);
+  };
 
-      dispatch(save(post));
-      navigate('/');
+  const changeNameHandler = (e) => {
+    setField('name', e.target.value);
+  };
+
+  const changeImageUrlHandler = (e) => {
+    setField('imageUrl', e.target.value);
+  };
+
+  const savePostHandler = (e) => {
+    e.preventDefault();
+
+    const newErrors = findFormErrors();
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      if (editorState.getCurrentContent().getPlainText()) {
+        const post = {
+          name: form.name,
+          title: form.title,
+          imageUrl: form.imageUrl,
+          editorState,
+        };
+
+        dispatch(save(post));
+        navigate('/');
+      } else {
+        // Temporary thing, will add reactivity later
+        console.log('Editor content cannot be empty!');
+      }
     }
   };
 
@@ -42,39 +96,45 @@ const BlogEditor = () => {
     <>
       <h1 className='text-center m-3'>Create a Blog Post!</h1>
       <Container className='container--override'>
-        <Form>
+        <Form onSubmit={savePostHandler}>
           <FormInput
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => changeTitleHandler(e)}
             label='Title'
             placeholder='Enter a title for your post!'
             formGroupClass='form-group--container'
+            isInvalid={!!errors.title}
+            errorMessage={errors.title}
           />
           <FormInput
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => changeNameHandler(e)}
             label='Name'
             placeholder='Enter your name!'
             formGroupClass='form-group--container'
+            isInvalid={!!errors.name}
+            errorMessage={errors.name}
           />
           <FormInput
-            onChange={(e) => setImageUrl(e.target.value)}
+            onChange={(e) => changeImageUrlHandler(e)}
             label='Image URL'
             placeholder='Enter your image url!'
             formGroupClass='form-group--container'
+            isInvalid={!!errors.imageUrl}
+            errorMessage={errors.imageUrl}
           />
+          <div className='editor--container'>
+            <Editor
+              blockStylefn='editor--wrapper'
+              data-testid='editor'
+              editorState={editorState}
+              onEditorStateChange={setEditorState}
+            />
+          </div>
+          <div className='btn--container'>
+            <button type='submit' className='btn btn-primary'>
+              Save!
+            </button>
+          </div>
         </Form>
-        <div className='editor--container'>
-          <Editor
-            blockStylefn='editor--wrapper'
-            data-testid='editor'
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-          />
-        </div>
-        <div className='btn--container'>
-          <button onClick={savePostHandler} className='btn btn-primary'>
-            Save!
-          </button>
-        </div>
       </Container>
     </>
   );

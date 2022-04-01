@@ -21,12 +21,13 @@
     border: 1px solid black;
     padding: 2px;
     min-height: 400px;
-    margin-top: 30px;
   }
 
   &--wrapper {
     overflow: auto;
   }
+
+  &--form-group {
+    margin-top: 20px;
+  }
 }
-
-
