@@ -7,6 +7,7 @@ import { save, update } from '../../features/editor/editorSlice';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form } from 'react-bootstrap';
 import './BlogEditor.scss';
+import FormInput from '../widgets/FormInput';
 
 const BlogEditor = () => {
   const [title, setTitle] = useState('');
@@ -42,27 +43,24 @@ const BlogEditor = () => {
       <h1 className='text-center m-3'>Create a Blog Post!</h1>
       <Container className='container--override'>
         <Form>
-          <Form.Group className='form-group--container'>
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              placeholder='Enter a title for your post!'
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className='form-group--container'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              placeholder='Enter your name!'
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className='form-group--container'>
-            <Form.Label>Image Url</Form.Label>
-            <Form.Control
-              placeholder='Enter your image url!'
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </Form.Group>
+          <FormInput
+            onChange={(e) => setTitle(e.target.value)}
+            label='Title'
+            placeholder='Enter a title for your post!'
+            formGroupClass='form-group--container'
+          />
+          <FormInput
+            onChange={(e) => setName(e.target.value)}
+            label='Name'
+            placeholder='Enter your name!'
+            formGroupClass='form-group--container'
+          />
+          <FormInput
+            onChange={(e) => setImageUrl(e.target.value)}
+            label='Image URL'
+            placeholder='Enter your image url!'
+            formGroupClass='form-group--container'
+          />
         </Form>
         <div className='editor--container'>
           <Editor
