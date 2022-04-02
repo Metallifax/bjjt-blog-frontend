@@ -1,6 +1,7 @@
 import { Form } from 'react-bootstrap';
 
 const FormInput = ({
+  id,
   formGroupClass,
   label,
   placeholder,
@@ -9,9 +10,10 @@ const FormInput = ({
   errorMessage,
 }) => {
   return (
-    <Form.Group className={formGroupClass || null}>
-      {label && <Form.Label>{label}</Form.Label>}
+    <Form.Group data-testid='input' className={formGroupClass || null}>
+      {label && <Form.Label htmlFor={id}>{label}</Form.Label>}
       <Form.Control
+        id={id}
         placeholder={placeholder || 'Enter text here!'}
         onChange={onChange}
         isInvalid={isInvalid}

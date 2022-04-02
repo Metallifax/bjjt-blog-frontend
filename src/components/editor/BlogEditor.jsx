@@ -98,6 +98,7 @@ const BlogEditor = () => {
       <Container className='container--override'>
         <Form onSubmit={savePostHandler}>
           <FormInput
+            id='title'
             onChange={(e) => changeTitleHandler(e)}
             label='Title'
             placeholder='Enter a title for your post!'
@@ -106,6 +107,7 @@ const BlogEditor = () => {
             errorMessage={errors.title}
           />
           <FormInput
+            id='name'
             onChange={(e) => changeNameHandler(e)}
             label='Name'
             placeholder='Enter your name!'
@@ -114,6 +116,7 @@ const BlogEditor = () => {
             errorMessage={errors.name}
           />
           <FormInput
+            id='imageUrl'
             onChange={(e) => changeImageUrlHandler(e)}
             label='Image URL'
             placeholder='Enter your image url!'
