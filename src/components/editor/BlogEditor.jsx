@@ -5,7 +5,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch } from 'react-redux';
 import { save, update } from '../../features/editor/editorSlice';
 import { useNavigate } from 'react-router-dom';
-import { Container, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import './BlogEditor.scss';
 import FormInput from '../widgets/FormInput';
 
@@ -129,11 +129,9 @@ const BlogEditor = () => {
               onEditorStateChange={setEditorState}
             />
           </div>
-          <div className='btn--container'>
-            <button type='submit' className='btn btn-primary'>
-              Save!
-            </button>
-          </div>
+          <Button variant='primary' type='submit' className='btn--container'>
+            Save!
+          </Button>
         </Form>
       </Container>
     </>

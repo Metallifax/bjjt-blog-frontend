@@ -31,3 +31,9 @@
     margin-top: 20px;
   }
 }
+
+.container {
+  &--override {
+    overflow: auto;
+  }
+}

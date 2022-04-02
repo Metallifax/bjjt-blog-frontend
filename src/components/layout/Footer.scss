@@ -7,9 +7,14 @@
   padding: 15px;
   left: 0;
   width: 100%;
+  margin-top: 50px;
 
   &--text {
     text-align: center;
     margin: 0 auto;
   }
+}
+.clear {
+  clear: both;
+  height: 70px;
 }
