@@ -132,7 +132,7 @@ const BlogEditor = () => {
               onEditorStateChange={setEditorState}
             />
           </div>
-          <Button variant='primary' type='submit' className='btn--container'>
+          <Button variant='primary' type='submit' className='my-btn--container'>
             Save!
           </Button>
         </Form>
