@@ -1,4 +1,4 @@
-import { render, screen } from '../../../test-utils';
+import { render, screen } from '../../../../test-utils';
 import DisplayMarkupFromEditor from '../DisplayMarkupFromEditor';
 
 describe('Tests for the DisplayMarkupFromEditor component', () => {

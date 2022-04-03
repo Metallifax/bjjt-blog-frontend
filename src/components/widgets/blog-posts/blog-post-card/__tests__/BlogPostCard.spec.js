@@ -1,8 +1,8 @@
 import React from 'react';
-import { cleanup, renderWithRouter, screen } from '../../../../test-utils';
+import { cleanup, renderWithRouter, screen } from '../../../../../test-utils';
 import BlogPostCard from '../BlogPostCard';
 import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '../../../../features/editor/editorSlice';
+import editorReducer from '../../../../../features/editor/editorSlice';
 import { Provider } from 'react-redux';
 import { EditorState } from 'draft-js';
 

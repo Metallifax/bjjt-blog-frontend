@@ -1,7 +1,6 @@
-@import '~bootstrap/scss/bootstrap';
+@import '../../../../node_modules/bootstrap/scss/bootstrap';
 
-.btn {
-  @extend .btn;
+.my-btn {
   width: 250px;
   height: 50px;
 

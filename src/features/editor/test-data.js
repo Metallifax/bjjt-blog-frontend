@@ -15,10 +15,9 @@ const data = [
     title: 'Marge',
     name: 'Marge Simpson',
     imageUrl:
-      'https://www.gannett-cdn.com/-mm-/d95634d8cf722215fec6d500c36ba3' +
-      '6ee15a4c48/c=0-634-1644-1559/local/-/media/2016/01/23/USATODAY/' +
-      'usatsports/marge.jpg?width=1644&height=925&fit=crop&format=pjpg' +
-      '&auto=webp',
+      'https://images.immediate.co.uk/production/volatile/sites/3/2016' +
+      '/03/Simpsons_g2013_R1_marge-04bf0d1.jpg?quality=90&crop=3px,170' +
+      'px,1884px,1255px&resize=980,654',
     editorState: EditorState.createWithText('Marge simpson!'),
   },
 ];

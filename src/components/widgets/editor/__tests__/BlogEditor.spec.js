@@ -4,10 +4,10 @@ import {
   fireEvent,
   renderWithRouter,
   screen,
-} from '../../../test-utils';
+} from '../../../../test-utils';
 import BlogEditor from '../BlogEditor';
 import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '../../../features/editor/editorSlice';
+import editorReducer from '../../../../features/editor/editorSlice';
 import { Provider } from 'react-redux';
 
 const store = configureStore({
