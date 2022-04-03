@@ -12,26 +12,18 @@ import FormInput from '../FormInput';
 
 const BlogEditor = () => {
   const [editorState, setEditorState] = useState('hello there!');
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
     const newErrors = {};
     const editorText = editorState;
 
-    // name errors
     if (!name || name === '') newErrors.name = 'Cannot be blank';
-
-    // title errors
     if (!title || title === '') newErrors.title = 'Cannot be blank';
-
-    // imageUrl
     if (!imageUrl || imageUrl === '') newErrors.imageUrl = 'Cannot be blank';
-
     if (!editorText || editorText === '') newErrors.editor = 'Cannot be blank';
 
     return newErrors;
