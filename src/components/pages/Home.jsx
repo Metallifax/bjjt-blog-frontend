@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
+
 import BlogPostsContainer from '../widgets/blog-posts/BlogPostsContainer';
 import LaunchCustomModal from '../widgets/modal/custom-modal/LaunchCustomModal';
 import './Home.scss';
+
 const Home = () => {
   const posts = useSelector((state) => state.editor.posts);
 

@@ -1,5 +1,7 @@
-import { Button } from 'react-bootstrap';
 import { useState } from 'react';
+
+import { Button } from 'react-bootstrap';
+
 import CustomModal from './CustomModal';
 
 const LaunchCustomModal = ({ text, children, headingText }) => {
