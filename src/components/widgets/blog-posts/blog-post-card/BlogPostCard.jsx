@@ -2,7 +2,7 @@ import { Card } from 'react-bootstrap';
 import './BlogPostCard.scss';
 
 const BlogPostCard = ({ title, name, imageUrl, editorState }) => {
-  const textArr = editorState.getCurrentContent().getPlainText().split(' ', 25);
+  const textArr = editorState.split(' ', 25);
 
   return (
     <Card

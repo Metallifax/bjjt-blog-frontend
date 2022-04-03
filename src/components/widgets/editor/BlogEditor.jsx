@@ -1,7 +1,6 @@
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
+import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from 'rehype-sanitize';
 import { useEffect, useState } from 'react';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch } from 'react-redux';
 import { save, update } from '../../../features/editor/editorSlice';
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +9,7 @@ import './BlogEditor.scss';
 import FormInput from '../FormInput';
 
 const BlogEditor = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithText('Enter here to create your post!'),
-  );
+  const [editorState, setEditorState] = useState('hello there!');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +19,7 @@ const BlogEditor = () => {
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
     const newErrors = {};
-    const editorText = editorState.getCurrentContent().getPlainText();
+    const editorText = editorState;
 
     // name errors
     if (!name || name === '') newErrors.name = 'Cannot be blank';
@@ -75,7 +72,7 @@ const BlogEditor = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      if (editorState.getCurrentContent().getPlainText()) {
+      if (editorState) {
         const post = {
           name: form.name,
           title: form.title,
@@ -125,13 +122,15 @@ const BlogEditor = () => {
             errorMessage={errors.imageUrl}
           />
           <div className='editor--container'>
-            <Editor
-              blockStylefn='editor--wrapper'
-              data-testid='editor'
-              editorState={editorState}
-              onEditorStateChange={setEditorState}
+            <MDEditor
+              value={editorState}
+              onChange={setEditorState}
+              previewOptions={{
+                rehypePlugins: [[rehypeSanitize]],
+              }}
             />
           </div>
+
           <Button variant='primary' type='submit' className='my-btn--container'>
             Save!
           </Button>

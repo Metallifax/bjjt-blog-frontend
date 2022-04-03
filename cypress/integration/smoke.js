@@ -84,10 +84,6 @@ describe('visiting the Editor page', () => {
     checkNavbar();
   });
 
-  it('should contain an editor', () => {
-    cy.get('div').get('.rdw-editor-wrapper').should('be.visible');
-  });
-
   it('should have a footer', () => {
     checkFooter();
   });

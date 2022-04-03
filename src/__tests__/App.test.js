@@ -39,6 +39,6 @@ describe('App tests', () => {
       </Provider>,
       { route: '/editor' },
     );
-    expect(screen.getByLabelText(/rdw-wrapper/i)).toBeInTheDocument();
+    expect(screen.getByText('Create a Blog Post!')).toBeInTheDocument();
   });
 });

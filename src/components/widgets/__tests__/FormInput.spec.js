@@ -35,6 +35,6 @@ describe('FormInput tests', () => {
     const input = screen.getByRole('textbox', { class: 'my-class' });
     fireEvent.change(input, { target: { value: 'hello world!' } });
 
-    expect(input.value).toBe('hello world!');
+    expect(input).toHaveValue('hello world!');
   });
 });

@@ -34,8 +34,7 @@ describe('BlogEditor component tests', () => {
   test('BlogEditor should render', () => {
     localRender();
 
-    const editor = screen.getByLabelText('rdw-wrapper');
-    expect(editor).toBeInTheDocument();
+    expect(screen.getByText('Create a Blog Post!')).toBeInTheDocument();
   });
 
   // eslint-disable-next-line max-len
