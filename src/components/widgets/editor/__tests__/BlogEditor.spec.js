@@ -1,4 +1,7 @@
-import React from 'react';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import editorReducer from '../../../../features/editor/editorSlice';
 import {
   cleanup,
   fireEvent,
@@ -6,9 +9,6 @@ import {
   screen,
 } from '../../../../test-utils';
 import BlogEditor from '../BlogEditor';
-import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '../../../../features/editor/editorSlice';
-import { Provider } from 'react-redux';
 
 const store = configureStore({
   reducer: { editor: editorReducer },

@@ -8,7 +8,8 @@
   ],
   "plugins": [
     "prettier",
-    "prefer-arrow-functions"
+    "prefer-arrow-functions",
+    "import"
   ],
   "rules": {
     "prettier/prettier": "warn",
@@ -29,6 +30,33 @@
         "extensions": [
           ".js",
           ".jsx"
+        ]
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always",
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
         ]
       }
     ]

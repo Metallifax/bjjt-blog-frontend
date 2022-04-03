@@ -1,8 +1,9 @@
-import { renderWithRouter, screen } from '../test-utils';
-import App from '../App';
-import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import App from '../App';
 import editorReducer from '../features/editor/editorSlice';
+import { renderWithRouter, screen } from '../test-utils';
 
 describe('App tests', () => {
   const store = configureStore({

@@ -1,10 +1,12 @@
-import MDEditor from '@uiw/react-md-editor';
-import rehypeSanitize from 'rehype-sanitize';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { save, update } from '../../../features/editor/editorSlice';
-import { useNavigate } from 'react-router-dom';
+
+import MDEditor from '@uiw/react-md-editor';
 import { Button, Container, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import rehypeSanitize from 'rehype-sanitize';
+
+import { save, update } from '../../../features/editor/editorSlice';
 import './BlogEditor.scss';
 import FormInput from '../FormInput';
 
