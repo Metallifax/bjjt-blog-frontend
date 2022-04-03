@@ -1,0 +1,10 @@
+.card {
+  &--container {
+    display: block;
+    min-width: 400px;
+  }
+
+  &--image {
+    max-height: 200px;
+  }
+}

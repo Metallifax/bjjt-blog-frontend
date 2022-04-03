@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import data from './test-data';
 
 export const editorSlice = createSlice({
   name: 'editor',
   initialState: {
+    // remove the posts data or Cypress will fail, will make this robust later
+    // posts: data,
     posts: [],
     value: undefined,
   },
