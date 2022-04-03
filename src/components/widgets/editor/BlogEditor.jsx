@@ -3,11 +3,11 @@ import { EditorState } from 'draft-js';
 import { useEffect, useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch } from 'react-redux';
-import { save, update } from '../../features/editor/editorSlice';
+import { save, update } from '../../../features/editor/editorSlice';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Form } from 'react-bootstrap';
 import './BlogEditor.scss';
-import FormInput from '../widgets/FormInput';
+import FormInput from '../FormInput';
 
 const BlogEditor = () => {
   const [editorState, setEditorState] = useState(() =>

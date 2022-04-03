@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import BlogPostsContainer from '../blog-posts/BlogPostsContainer';
+import BlogPostsContainer from '../widgets/blog-posts/BlogPostsContainer';
 
 const Home = () => {
   const posts = useSelector((state) => state.editor.posts);

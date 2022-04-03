@@ -1,6 +1,6 @@
 import { convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import SanitizedHtml from '../utils/SanitizedHtml';
+import SanitizedHtml from '../SanitizedHtml';
 
 const DisplayMarkupFromEditor = ({
   editorData = EditorState.createEmpty(),

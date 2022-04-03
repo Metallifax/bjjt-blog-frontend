@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import BlogEditor from './components/editor/BlogEditor';
+import BlogEditor from './components/widgets/editor/BlogEditor';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
-import Layout from './components/layout/Layout';
+import Layout from './components/widgets/layout/Layout';
 
 const App = () => {
   return (
