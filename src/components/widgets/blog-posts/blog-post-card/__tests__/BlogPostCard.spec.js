@@ -14,6 +14,8 @@ const store = configureStore({
 });
 
 const testData = {
+  id: 1,
+  date: 1,
   title: 'test title',
   name: 'test name',
   imageUrl:
@@ -22,16 +24,9 @@ const testData = {
 };
 
 const localRender = (data) => {
-  const { title, name, imageUrl, editorState } = data;
-
   renderWithRouter(
     <Provider store={store}>
-      <BlogPostCard
-        title={title}
-        name={name}
-        imageUrl={imageUrl}
-        editorState={editorState}
-      />
+      <BlogPostCard post={data} />
     </Provider>,
   );
 };

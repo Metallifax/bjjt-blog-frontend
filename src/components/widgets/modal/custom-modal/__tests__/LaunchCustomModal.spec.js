@@ -1,5 +1,8 @@
+import NiceModal from '@ebay/nice-modal-react';
+
 import {
   fireEvent,
+  render,
   renderWithRouter,
   screen,
   waitFor,
@@ -31,7 +34,9 @@ describe('test the LaunchCustomModal component', () => {
   });
 
   test('clicking the launch button opens a modal', () => {
-    renderWithRouter(<LaunchCustomModal headingText='heading' text='text' />);
+    render(<LaunchCustomModal headingText='heading' text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
 
     const button = screen.getByRole('button', { name: 'text' });
     fireEvent.click(button);
@@ -40,7 +45,9 @@ describe('test the LaunchCustomModal component', () => {
   });
 
   test('renders default heading upon modal launch', () => {
-    renderWithRouter(<LaunchCustomModal text='text' />);
+    render(<LaunchCustomModal text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
 
     const button = screen.getByRole('button', { name: 'text' });
     fireEvent.click(button);
@@ -49,7 +56,9 @@ describe('test the LaunchCustomModal component', () => {
   });
 
   test('passing items as children renders them inside the modal', () => {
-    renderWithRouter(<LaunchCustomModal text='text'>child</LaunchCustomModal>);
+    render(<LaunchCustomModal text='text'>child</LaunchCustomModal>, {
+      wrapper: NiceModal.Provider,
+    });
 
     const button = screen.getByRole('button', { name: 'text' });
     fireEvent.click(button);
@@ -59,7 +68,9 @@ describe('test the LaunchCustomModal component', () => {
 
   // eslint-disable-next-line max-len
   test("after opening the modal, clicking the 'X' button closes the modal", async () => {
-    renderWithRouter(<LaunchCustomModal headingText='heading' text='text' />);
+    render(<LaunchCustomModal headingText='heading' text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
 
     const button = screen.getByRole('button', { name: 'text' });
     fireEvent.click(button);
@@ -75,7 +86,9 @@ describe('test the LaunchCustomModal component', () => {
 
   // eslint-disable-next-line max-len
   test('after opening the modal, clicking outside the modal closes it', async () => {
-    renderWithRouter(<LaunchCustomModal headingText='heading' text='text' />);
+    render(<LaunchCustomModal headingText='heading' text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
 
     const button = screen.getByRole('button', { name: 'text' });
     fireEvent.click(button);
