@@ -1,5 +1,6 @@
 import React from 'react';
 
+import NiceModal from '@ebay/nice-modal-react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider } from 'react-redux';
@@ -12,7 +13,9 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <NiceModal.Provider>
+        <App />
+      </NiceModal.Provider>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),

@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 
+import { useModal } from '@ebay/nice-modal-react';
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { save, update } from '../../../features/editor/editorSlice';
 import './BlogEditor.scss';
 import FormInput from '../FormInput';
+import CustomModal from '../modal/custom-modal/CustomModal';
 
 const BlogEditor = () => {
   const [editorState, setEditorState] = useState('hello there!');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const modal = useModal(CustomModal);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const findFormErrors = () => {
@@ -65,27 +66,24 @@ const BlogEditor = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      if (editorState) {
-        const post = {
-          name: form.name,
-          title: form.title,
-          imageUrl: form.imageUrl,
-          editorState,
-        };
+    } else if (editorState) {
+      const post = {
+        name: form.name,
+        title: form.title,
+        imageUrl: form.imageUrl,
+        editorState,
+      };
 
-        dispatch(save(post));
-        navigate('/');
-      } else {
-        // Temporary thing, will add reactivity later
-        console.log('Editor content cannot be empty!');
-      }
+      dispatch(save(post));
+      modal.hide();
+    } else {
+      // Temporary thing, will add reactivity later
+      console.log('Editor content cannot be empty!');
     }
   };
 
   return (
     <>
-      <h1 className='text-center m-3'>Create a Blog Post!</h1>
       <Container className='container--override'>
         <Form onSubmit={savePostHandler}>
           <FormInput

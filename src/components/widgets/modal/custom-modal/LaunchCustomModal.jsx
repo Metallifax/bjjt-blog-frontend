@@ -1,28 +1,22 @@
-import { useState } from 'react';
-
+import NiceModal from '@ebay/nice-modal-react';
 import { Button } from 'react-bootstrap';
 
 import CustomModal from './CustomModal';
 
 const LaunchCustomModal = ({ text, children, headingText }) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const showCustomModal = () => {
+    NiceModal.show(CustomModal, {
+      text: text,
+      headingText: headingText,
+      children: children,
+    });
+  };
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant='primary' onClick={showCustomModal}>
         {text || 'Click me!'}
       </Button>
-
-      <CustomModal
-        headingText={headingText}
-        show={show}
-        handleClose={handleClose}
-      >
-        {children}
-      </CustomModal>
     </>
   );
 };

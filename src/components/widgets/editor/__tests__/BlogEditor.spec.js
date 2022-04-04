@@ -31,12 +31,6 @@ describe('BlogEditor component tests', () => {
     cleanup();
   });
 
-  test('BlogEditor should render', () => {
-    localRender();
-
-    expect(screen.getByText('Create a Blog Post!')).toBeInTheDocument();
-  });
-
   // eslint-disable-next-line max-len
   test("When 'Save!' is pressed with no input content, all inputs should show error", () => {
     localRender();
