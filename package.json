@@ -28,9 +28,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test-all": "npm run format && npm run lint && npm test -- --watchAll=false && npm run cy:sr",
-    "test-cov": "npm test -- --watchAll=false --coverage",
+    "test": "react-scripts test --silent",
+    "test-verbose": "react-scripts test",
+    "test-all": "npm run format && npm run lint && npm test -- --watchAll=false --silent && npm run cy:sr",
+    "test-cov": "npm test -- --watchAll=false --coverage --silent",
     "eject": "react-scripts eject",
     "format": "prettier -c src && prettier -c cypress",
     "format-write": "prettier --write src && prettier --write cypress",
