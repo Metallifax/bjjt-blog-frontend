@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Header = () => (
   <Navbar bg='primary' expand='lg' variant='dark'>
     <Container>
-      <LinkContainer exact to='/'>
+      <LinkContainer to='/'>
         <Navbar.Brand>Blogging App</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
