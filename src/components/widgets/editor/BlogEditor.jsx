@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useModal } from '@ebay/nice-modal-react';
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Container, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { save } from '../../../features/editor/editorSlice';
@@ -17,6 +17,7 @@ const BlogEditor = () => {
   const modal = useModal(CustomModal);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const posts = useSelector((state) => state.editor.posts);
 
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
@@ -59,16 +60,25 @@ const BlogEditor = () => {
   const savePostHandler = (e) => {
     e.preventDefault();
 
+    let id;
+    if (posts.length === 0) {
+      id = 1;
+    } else {
+      id = posts[posts.length - 1].id + 1;
+    }
+
     const newErrors = findFormErrors();
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else if (editorState) {
       const post = {
+        id,
         name: form.name,
         title: form.title,
         imageUrl: form.imageUrl,
         editorState,
+        dateCreated: Date.now(),
       };
 
       dispatch(save(post));
