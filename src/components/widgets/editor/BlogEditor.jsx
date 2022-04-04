@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useModal } from '@ebay/nice-modal-react';
 import MDEditor from '@uiw/react-md-editor';
@@ -6,7 +6,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
-import { save, update } from '../../../features/editor/editorSlice';
+import { save } from '../../../features/editor/editorSlice';
 import './BlogEditor.scss';
 import FormInput from '../FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
@@ -17,6 +17,7 @@ const BlogEditor = () => {
   const modal = useModal(CustomModal);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
     const newErrors = {};
@@ -42,10 +43,6 @@ const BlogEditor = () => {
         [field]: null,
       });
   };
-
-  useEffect(() => {
-    dispatch(update(editorState));
-  }, [editorState, dispatch]);
 
   const changeTitleHandler = (e) => {
     setField('title', e.target.value);

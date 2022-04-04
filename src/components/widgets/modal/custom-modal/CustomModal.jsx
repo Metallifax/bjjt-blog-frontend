@@ -6,7 +6,7 @@ const CustomModal = NiceModal.create(
     const modal = useModal();
 
     return (
-      <Modal show={modal.visible} onHide={() => modal.hide()}>
+      <Modal size='lg' show={modal.visible} onHide={() => modal.hide()}>
         <Modal.Header data-testid='close-button' closeButton>
           <Modal.Title>{headingText ? headingText : 'Your modal'}</Modal.Title>
         </Modal.Header>
