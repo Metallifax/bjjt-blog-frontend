@@ -1,0 +1,20 @@
+.post {
+  &--container {
+    max-width: 70vw;
+    margin: 0 auto;
+  }
+
+  &--title {
+    margin: 20px 0;
+
+    &--container {
+      width: 50vw;
+      min-height: 30vh;
+    }
+
+    &--image {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}

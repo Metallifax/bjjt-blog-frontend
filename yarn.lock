@@ -8828,7 +8828,7 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
-"react-markdown@~8.0.0":
+"react-markdown@^8.0.2", "react-markdown@~8.0.0":
   "integrity" "sha512-WeXeDlCPFZBbN75AiLVEmN4gC6pNWadsZVWWxWpvrYQnUTHsB3l1PH60I1sbxTJr0oWOQc3zhxTrRQMTceNifw=="
   "resolved" "https://registry.npmjs.org/react-markdown/-/react-markdown-8.0.2.tgz"
   "version" "8.0.2"

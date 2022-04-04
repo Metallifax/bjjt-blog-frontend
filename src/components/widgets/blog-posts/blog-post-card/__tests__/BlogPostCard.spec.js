@@ -80,14 +80,6 @@ describe('BlogEditor component tests', () => {
       expect(screen.getByRole('img').src).toContain(testData.imageUrl);
     });
 
-    test('that content exists and displays with minimum text', () => {
-      localRender(testData);
-
-      expect(screen.getByText('test editor')).toHaveTextContent(
-        testData.editorState,
-      );
-    });
-
     // eslint-disable-next-line max-len
     test("that it doesn't render all of the lines from a long post content", () => {
       const alteredData = { ...testData };
@@ -101,23 +93,6 @@ describe('BlogEditor component tests', () => {
       expect(
         screen.queryByText(alteredData.editorState),
       ).not.toBeInTheDocument();
-    });
-
-    test("that exactly 25 lines + '...' is rendered when long phrase", () => {
-      const alteredData = { ...testData };
-      alteredData.editorState =
-        'this line is more than twenty five words in order to test of ' +
-        'this does indeed only display 25 words from the editor state ' +
-        "so that it doesn't drag on and on";
-
-      localRender(alteredData);
-
-      const testString = alteredData.editorState
-        .split(' ', 25)
-        .join(' ')
-        .concat('...');
-
-      expect(screen.getByText(testString)).toBeInTheDocument();
     });
 
     test('pressing the delete button opens a modal', () => {
