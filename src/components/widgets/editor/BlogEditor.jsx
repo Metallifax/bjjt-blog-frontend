@@ -1,38 +1,31 @@
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
-import { useEffect, useState } from 'react';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useDispatch } from 'react-redux';
-import { save, update } from '../../../features/editor/editorSlice';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { useModal } from '@ebay/nice-modal-react';
+import MDEditor from '@uiw/react-md-editor';
 import { Button, Container, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import rehypeSanitize from 'rehype-sanitize';
+
+import { save } from '../../../features/editor/editorSlice';
 import './BlogEditor.scss';
 import FormInput from '../FormInput';
+import CustomModal from '../modal/custom-modal/CustomModal';
 
 const BlogEditor = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithText('Enter here to create your post!'),
-  );
-
+  const [editorState, setEditorState] = useState('hello there!');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const modal = useModal(CustomModal);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
     const newErrors = {};
-    const editorText = editorState.getCurrentContent().getPlainText();
+    const editorText = editorState;
 
-    // name errors
     if (!name || name === '') newErrors.name = 'Cannot be blank';
-
-    // title errors
     if (!title || title === '') newErrors.title = 'Cannot be blank';
-
-    // imageUrl
     if (!imageUrl || imageUrl === '') newErrors.imageUrl = 'Cannot be blank';
-
     if (!editorText || editorText === '') newErrors.editor = 'Cannot be blank';
 
     return newErrors;
@@ -50,10 +43,6 @@ const BlogEditor = () => {
         [field]: null,
       });
   };
-
-  useEffect(() => {
-    dispatch(update(editorState));
-  }, [editorState, dispatch]);
 
   const changeTitleHandler = (e) => {
     setField('title', e.target.value);
@@ -74,27 +63,24 @@ const BlogEditor = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      if (editorState.getCurrentContent().getPlainText()) {
-        const post = {
-          name: form.name,
-          title: form.title,
-          imageUrl: form.imageUrl,
-          editorState,
-        };
+    } else if (editorState) {
+      const post = {
+        name: form.name,
+        title: form.title,
+        imageUrl: form.imageUrl,
+        editorState,
+      };
 
-        dispatch(save(post));
-        navigate('/');
-      } else {
-        // Temporary thing, will add reactivity later
-        console.log('Editor content cannot be empty!');
-      }
+      dispatch(save(post));
+      modal.hide();
+    } else {
+      // Temporary thing, will add reactivity later
+      console.log('Editor content cannot be empty!');
     }
   };
 
   return (
     <>
-      <h1 className='text-center m-3'>Create a Blog Post!</h1>
       <Container className='container--override'>
         <Form onSubmit={savePostHandler}>
           <FormInput
@@ -125,13 +111,15 @@ const BlogEditor = () => {
             errorMessage={errors.imageUrl}
           />
           <div className='editor--container'>
-            <Editor
-              blockStylefn='editor--wrapper'
-              data-testid='editor'
-              editorState={editorState}
-              onEditorStateChange={setEditorState}
+            <MDEditor
+              value={editorState}
+              onChange={setEditorState}
+              previewOptions={{
+                rehypePlugins: [[rehypeSanitize]],
+              }}
             />
           </div>
+
           <Button variant='primary' type='submit' className='my-btn--container'>
             Save!
           </Button>

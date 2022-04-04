@@ -1,4 +1,5 @@
 import { Container, Row } from 'react-bootstrap';
+
 import BlogPostCard from './blog-post-card/BlogPostCard';
 
 const BlogPostsContainer = ({ posts }) => {

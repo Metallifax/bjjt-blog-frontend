@@ -1,10 +1,9 @@
-import React from 'react';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import editorReducer from '../../../../../features/editor/editorSlice';
 import { cleanup, renderWithRouter, screen } from '../../../../../test-utils';
 import BlogPostCard from '../BlogPostCard';
-import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from '../../../../../features/editor/editorSlice';
-import { Provider } from 'react-redux';
-import { EditorState } from 'draft-js';
 
 const store = configureStore({
   reducer: { editor: editorReducer },
@@ -19,7 +18,7 @@ const testData = {
   name: 'test name',
   imageUrl:
     'https://www.grouphealth.ca/wp-content/uploads/2018/05/placeholder-image.png',
-  editorState: EditorState.createWithText('test editor'),
+  editorState: 'test editor',
 };
 
 const localRender = (data) => {
@@ -73,41 +72,35 @@ describe('BlogEditor component tests', () => {
       localRender(testData);
 
       expect(screen.getByText('test editor')).toHaveTextContent(
-        testData.editorState.getCurrentContent().getPlainText(),
+        testData.editorState,
       );
     });
 
     // eslint-disable-next-line max-len
     test("that it doesn't render all of the lines from a long post content", () => {
       const alteredData = { ...testData };
-      alteredData.editorState = EditorState.createWithText(
+      alteredData.editorState =
         'this line is more than twenty five words in order to test of ' +
-          'this does indeed only display 25 words from the editor state ' +
-          "so that it doesn't drag on and on",
-      );
+        'this does indeed only display 25 words from the editor state ' +
+        "so that it doesn't drag on and on";
 
       localRender(alteredData);
 
       expect(
-        screen.queryByText(
-          alteredData.editorState.getCurrentContent().getPlainText(),
-        ),
+        screen.queryByText(alteredData.editorState),
       ).not.toBeInTheDocument();
     });
 
     test("that exactly 25 lines + '...' is rendered when long phrase", () => {
       const alteredData = { ...testData };
-      alteredData.editorState = EditorState.createWithText(
+      alteredData.editorState =
         'this line is more than twenty five words in order to test of ' +
-          'this does indeed only display 25 words from the editor state ' +
-          "so that it doesn't drag on and on",
-      );
+        'this does indeed only display 25 words from the editor state ' +
+        "so that it doesn't drag on and on";
 
       localRender(alteredData);
 
       const testString = alteredData.editorState
-        .getCurrentContent()
-        .getPlainText()
         .split(' ', 25)
         .join(' ')
         .concat('...');

@@ -13,12 +13,6 @@ const Header = () => (
           <LinkContainer to='/'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to='/about'>
-            <Nav.Link>About</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='/editor'>
-            <Nav.Link>Editor</Nav.Link>
-          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Container>

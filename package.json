@@ -7,22 +7,20 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "@uiw/react-md-editor": "^3.11.2",
     "bootstrap": "^5.1.3",
-    "draft-js": "^0.11.7",
-    "draftjs-to-html": "^0.9.1",
     "history": "^5.3.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.2",
     "react-dom": "^17.0.2",
-    "react-draft-wysiwyg": "^1.14.7",
     "react-redux": "^7.2.6",
     "react-router-bootstrap": "^0.26.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "redux-mock-store": "^1.5.4",
-    "sanitize-html": "^2.7.0",
+    "rehype-sanitize": "^5.0.1",
     "sass": "^1.49.9",
     "web-vitals": "^2.1.4"
   },
@@ -35,7 +33,7 @@
     "eject": "react-scripts eject",
     "format": "prettier -c src && prettier -c cypress",
     "format-write": "prettier --write src && prettier --write cypress",
-    "lint": "eslint src/ && eslint cypress/",
+    "lint": "eslint --ext js,jsx src && eslint --ext js cypress",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:sr": "start-test 3000 cy:run",
@@ -44,6 +42,9 @@
   "jest": {
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.jsx"
+    ],
+    "transformIgnorePatterns": [
+      "//node_modules/(?!uri-transformer)"
     ]
   },
   "browserslist": {
@@ -59,10 +60,12 @@
     ]
   },
   "devDependencies": {
+    "@ebay/nice-modal-react": "^1.2.1",
     "cypress": "^9.5.3",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prefer-arrow-functions": "^3.1.4",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",

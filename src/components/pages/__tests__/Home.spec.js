@@ -1,7 +1,5 @@
 import { render, screen } from '../../../test-utils';
 import Home from '../Home';
-// import { save } from '../../../features/editor/editorSlice';
-// import { EditorState } from 'draft-js';
 
 describe('home page tests', () => {
   test('renders the component', () => {
