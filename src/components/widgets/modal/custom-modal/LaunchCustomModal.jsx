@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 import CustomModal from './CustomModal';
 
-const LaunchCustomModal = ({ text, children, headingText }) => {
+const LaunchCustomModal = ({ text, children, headingText, buttonClass }) => {
   const showCustomModal = () => {
     NiceModal.show(CustomModal, {
       text: text,
@@ -14,7 +14,11 @@ const LaunchCustomModal = ({ text, children, headingText }) => {
 
   return (
     <>
-      <Button variant='primary' onClick={showCustomModal}>
+      <Button
+        className={buttonClass}
+        variant='primary'
+        onClick={showCustomModal}
+      >
         {text || 'Click me!'}
       </Button>
     </>

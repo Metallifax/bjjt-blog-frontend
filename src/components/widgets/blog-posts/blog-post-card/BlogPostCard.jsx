@@ -1,16 +1,25 @@
+import { useModal } from '@ebay/nice-modal-react';
 import moment from 'moment';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { deletePost } from '../../../../features/editor/editorSlice';
 import './BlogPostCard.scss';
+import CustomModal from '../../modal/custom-modal/CustomModal';
+import LaunchCustomModal from '../../modal/custom-modal/LaunchCustomModal';
 
 const BlogPostCard = ({ post }) => {
   const textArr = post.editorState.split(' ', 25);
   const date = post.dateCreated;
   const dispatch = useDispatch();
+  const modal = useModal(CustomModal);
 
   const formatted = moment(date).format('MMMM Do YYYY, h:mm:ss a');
+
+  const handleDelete = () => {
+    dispatch(deletePost(post));
+    modal.hide();
+  };
 
   return (
     <Card
@@ -35,7 +44,18 @@ const BlogPostCard = ({ post }) => {
       </Card.Body>
       <Card.Footer>
         <Card.Text>By: {post.name}</Card.Text>
-        <Button onClick={() => dispatch(deletePost(post))}>Delete</Button>
+        <LaunchCustomModal
+          buttonClass='btn btn-danger'
+          text='Delete'
+          headingText='Are you sure?'
+        >
+          <div className='flex-column'>
+            <Button className='btn btn-danger' onClick={handleDelete}>
+              Yes
+            </Button>
+            <Button onClick={() => modal.hide()}>Cancel</Button>
+          </div>
+        </LaunchCustomModal>
       </Card.Footer>
     </Card>
   );

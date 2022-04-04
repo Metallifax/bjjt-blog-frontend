@@ -1,8 +1,15 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import editorReducer from '../../../../../features/editor/editorSlice';
-import { cleanup, renderWithRouter, screen } from '../../../../../test-utils';
+import {
+  cleanup,
+  fireEvent,
+  renderWithRouter,
+  screen,
+  waitFor,
+} from '../../../../../test-utils';
 import BlogPostCard from '../BlogPostCard';
 
 const store = configureStore({
@@ -27,6 +34,16 @@ const localRender = (data) => {
   renderWithRouter(
     <Provider store={store}>
       <BlogPostCard post={data} />
+    </Provider>,
+  );
+};
+
+const renderWithModalProvider = (data) => {
+  renderWithRouter(
+    <Provider store={store}>
+      <NiceModal.Provider>
+        <BlogPostCard post={data} />
+      </NiceModal.Provider>
     </Provider>,
   );
 };
@@ -101,6 +118,63 @@ describe('BlogEditor component tests', () => {
         .concat('...');
 
       expect(screen.getByText(testString)).toBeInTheDocument();
+    });
+
+    test('pressing the delete button opens a modal', () => {
+      renderWithModalProvider(testData);
+
+      const deleteButton = screen.getByText('Delete');
+      fireEvent.click(deleteButton);
+
+      expect(screen.getByText('Are you sure?')).toBeInTheDocument();
+    });
+
+    test('modal contains another delete button', () => {
+      renderWithModalProvider(testData);
+
+      const deleteButton = screen.getByText('Delete');
+      fireEvent.click(deleteButton);
+
+      expect(screen.getByText('Yes')).toBeInTheDocument();
+    });
+
+    test('modal contains a cancel button', () => {
+      renderWithModalProvider(testData);
+
+      const deleteButton = screen.getByText('Delete');
+      fireEvent.click(deleteButton);
+
+      expect(screen.getByText('Cancel')).toBeInTheDocument();
+    });
+
+    // eslint-disable-next-line max-len
+    test('pressing the cancel button closes the modal and leaves the post', async () => {
+      renderWithModalProvider(testData);
+
+      const deleteButton = screen.getByText('Delete');
+      fireEvent.click(deleteButton);
+
+      const cancelButton = screen.getByText('Cancel');
+      fireEvent.click(cancelButton);
+
+      await waitFor(() =>
+        expect(screen.queryByText('Are you sure?')).not.toBeInTheDocument(),
+      );
+    });
+
+    // eslint-disable-next-line max-len
+    test('pressing the yes button closes the modal too', async () => {
+      renderWithModalProvider(testData);
+
+      const deleteButton = screen.getByText('Delete');
+      fireEvent.click(deleteButton);
+
+      const yesButton = screen.getByText('Yes');
+      fireEvent.click(yesButton);
+
+      await waitFor(() => {
+        expect(screen.queryByText('Are you sure')).not.toBeInTheDocument();
+      });
     });
   });
 });
