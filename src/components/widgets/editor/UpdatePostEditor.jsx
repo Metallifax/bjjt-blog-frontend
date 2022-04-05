@@ -6,18 +6,24 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
-import { save } from '../../../features/editor/editorSlice';
-import './BlogEditor.scss';
+import { update } from '../../../features/editor/editorSlice';
 import FormInput from '../FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
 
-const BlogEditor = () => {
-  const [editorState, setEditorState] = useState('hello there!');
+const UpdatePostEditor = ({ post }) => {
+  // const posts = useSelector((state) => state.editor.posts);
+  const [editorState, setEditorState] = useState(post.editorState);
   const dispatch = useDispatch();
   const modal = useModal(CustomModal);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    id: post.id,
+    title: post.title,
+    name: post.name,
+    imageUrl: post.imageUrl,
+    editorState: post.editorState,
+    dateCreated: post.dateCreated,
+  });
   const [errors, setErrors] = useState({});
-  const posts = useSelector((state) => state.editor.posts);
 
   const findFormErrors = () => {
     const { name, title, imageUrl } = form;
@@ -60,12 +66,12 @@ const BlogEditor = () => {
   const savePostHandler = (e) => {
     e.preventDefault();
 
-    let id;
-    if (posts.length === 0) {
-      id = 1;
-    } else {
-      id = posts[posts.length - 1].id + 1;
-    }
+    // let id;
+    // if (posts.length === 0) {
+    //   id = 1;
+    // } else {
+    //   id = posts[posts.length - 1].id + 1;
+    // }
 
     const newErrors = findFormErrors();
 
@@ -73,15 +79,15 @@ const BlogEditor = () => {
       setErrors(newErrors);
     } else if (editorState) {
       const post = {
-        id,
+        id: form.id,
         name: form.name,
         title: form.title,
         imageUrl: form.imageUrl,
         editorState,
-        dateCreated: Date.now(),
+        dateCreated: form.dateCreated,
       };
 
-      dispatch(save(post));
+      dispatch(update(post));
       modal.hide();
     } else {
       // Temporary thing, will add reactivity later
@@ -101,6 +107,7 @@ const BlogEditor = () => {
             formGroupClass='form-group--container'
             isInvalid={!!errors.title}
             errorMessage={errors.title}
+            value={form.title}
           />
           <FormInput
             id='name'
@@ -110,6 +117,7 @@ const BlogEditor = () => {
             formGroupClass='form-group--container'
             isInvalid={!!errors.name}
             errorMessage={errors.name}
+            value={form.name}
           />
           <FormInput
             id='imageUrl'
@@ -119,6 +127,7 @@ const BlogEditor = () => {
             formGroupClass='form-group--container'
             isInvalid={!!errors.imageUrl}
             errorMessage={errors.imageUrl}
+            value={form.imageUrl}
           />
           <div className='editor--container'>
             <MDEditor
@@ -139,4 +148,4 @@ const BlogEditor = () => {
   );
 };
 
-export default BlogEditor;
+export default UpdatePostEditor;

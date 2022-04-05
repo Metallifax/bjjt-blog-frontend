@@ -16,8 +16,15 @@ export const editorSlice = createSlice({
     deletePost: (state, action) => {
       state.posts = state.posts.filter((item) => item.id !== action.payload.id);
     },
+    update: (state, action) => {
+      let temp = state.posts;
+
+      const postIndex = temp.findIndex((obj) => obj.id === action.id);
+      temp[postIndex] = action;
+      state.posts = temp;
+    },
   },
 });
 
-export const { save, deletePost } = editorSlice.actions;
+export const { save, deletePost, update } = editorSlice.actions;
 export default editorSlice.reducer;
