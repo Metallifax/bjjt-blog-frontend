@@ -8,7 +8,7 @@ import {
   renderWithRouter,
   screen,
 } from '../../../../test-utils';
-import BlogEditor from '../BlogEditor';
+import CreatePostEditor from '../CreatePostEditor';
 
 const store = configureStore({
   reducer: { editor: editorReducer },
@@ -21,7 +21,7 @@ const store = configureStore({
 const localRender = () => {
   renderWithRouter(
     <Provider store={store}>
-      <BlogEditor />
+      <CreatePostEditor />
     </Provider>,
   );
 };

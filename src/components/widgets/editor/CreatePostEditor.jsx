@@ -11,7 +11,7 @@ import './BlogEditor.scss';
 import FormInput from '../FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
 
-const BlogEditor = () => {
+const CreatePostEditor = () => {
   const [editorState, setEditorState] = useState('hello there!');
   const dispatch = useDispatch();
   const modal = useModal(CustomModal);
@@ -139,4 +139,4 @@ const BlogEditor = () => {
   );
 };
 
-export default BlogEditor;
+export default CreatePostEditor;

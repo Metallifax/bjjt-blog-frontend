@@ -8,6 +8,7 @@ const FormInput = ({
   onChange,
   isInvalid,
   errorMessage,
+  value,
 }) => {
   return (
     <Form.Group data-testid='input' className={formGroupClass || null}>
@@ -17,6 +18,7 @@ const FormInput = ({
         placeholder={placeholder || 'Enter text here!'}
         onChange={onChange}
         isInvalid={isInvalid}
+        value={value}
       />
       <Form.Control.Feedback type='invalid'>
         {errorMessage}
