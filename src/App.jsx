@@ -6,6 +6,9 @@ import BlogPostDetails from './components/widgets/blog-posts/BlogPostDetails';
 import Layout from './components/widgets/layout/Layout';
 
 const App = () => {
+  // override dark mode
+  document.documentElement.setAttribute('data-color-mode', 'light');
+
   return (
     <Layout>
       <Routes>
