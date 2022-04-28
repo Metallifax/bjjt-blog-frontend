@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useModal } from '@ebay/nice-modal-react';
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Container, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { update } from '../../../features/editor/editorSlice';
