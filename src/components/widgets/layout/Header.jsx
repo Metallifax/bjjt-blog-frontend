@@ -13,6 +13,9 @@ const Header = () => (
           <LinkContainer to='/'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
+          <LinkContainer to='/signup'>
+            <Nav.Link>Signup</Nav.Link>
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Container>

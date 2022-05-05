@@ -8,7 +8,7 @@ import rehypeSanitize from 'rehype-sanitize';
 
 import { save } from '../../../features/editor/editorSlice';
 import './BlogEditor.scss';
-import FormInput from '../FormInput';
+import FormInput from '../custom-forms/FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
 
 const CreatePostEditor = () => {

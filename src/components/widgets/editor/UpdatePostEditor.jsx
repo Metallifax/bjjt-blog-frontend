@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { update } from '../../../features/editor/editorSlice';
-import FormInput from '../FormInput';
+import FormInput from '../custom-forms/FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
 
 const UpdatePostEditor = ({ post }) => {
