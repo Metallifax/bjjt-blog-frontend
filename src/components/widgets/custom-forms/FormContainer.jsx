@@ -2,9 +2,11 @@ import { Button, Form } from 'react-bootstrap';
 
 const FormContainer = ({ children, onSubmit, buttonText }) => {
   return (
-    <Form onSubmit={onSubmit}>
+    <Form aria-label='form' onSubmit={onSubmit}>
       {children}
-      <Button>{buttonText}</Button>
+      <Button type='submit' className='mt-4'>
+        {buttonText || 'Go!'}
+      </Button>
     </Form>
   );
 };
