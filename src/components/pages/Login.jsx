@@ -71,7 +71,7 @@ const Login = () => {
           console.log(res.data);
         })
         .catch(({ response: { data } }) => {
-          if (Object.keys(data)[0] === 'error') {
+          if (!Array.isArray(data) && Object.keys(data)[0] === 'error') {
             setResponseErrors([{ param: 'password', msg: data.error }]);
           } else {
             let m = data.errors.map((errorMap) => ({

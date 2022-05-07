@@ -5,6 +5,8 @@ import {
   render,
   renderWithRouter,
   screen,
+  within,
+  waitFor,
 } from '../../../../../test-utils';
 import LaunchCustomModal from '../LaunchCustomModal';
 
@@ -65,37 +67,37 @@ describe('test the LaunchCustomModal component', () => {
   });
 
   // eslint-disable-next-line max-len
-  // test("after opening the modal, clicking the 'X' button closes the modal", async () => {
-  //   render(<LaunchCustomModal headingText='heading' text='text' />, {
-  //     wrapper: NiceModal.Provider,
-  //   });
-  //
-  //   const button = screen.getByRole('button', { name: 'text' });
-  //   fireEvent.click(button);
-  //
-  //   const heading = screen.getByTestId('close-button');
-  //   const xButton = within(heading).getByRole('button');
-  //   fireEvent.click(xButton);
-  //
-  //   await waitFor(() =>
-  //     expect(screen.queryByText('heading')).not.toBeInTheDocument(),
-  //   );
-  // });
+  test("after opening the modal, clicking the 'X' button closes the modal", async () => {
+    render(<LaunchCustomModal headingText='heading' text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
+
+    const button = screen.getByRole('button', { name: 'text' });
+    fireEvent.click(button);
+
+    const heading = screen.getByTestId('close-button');
+    const xButton = within(heading).getByRole('button');
+    fireEvent.click(xButton);
+
+    await waitFor(() =>
+      expect(screen.queryByText('heading')).not.toBeInTheDocument(),
+    );
+  });
 
   // eslint-disable-next-line max-len
-  // test('after opening the modal, clicking outside the modal closes it', async () => {
-  //   render(<LaunchCustomModal headingText='heading' text='text' />, {
-  //     wrapper: NiceModal.Provider,
-  //   });
-  //
-  //   const button = screen.getByRole('button', { name: 'text' });
-  //   fireEvent.click(button);
-  //
-  //   const dialog = screen.getByRole('dialog');
-  //   fireEvent.click(dialog);
-  //
-  //   await waitFor(() =>
-  //     expect(screen.queryByText('heading')).not.toBeInTheDocument(),
-  //   );
-  // });
+  test('after opening the modal, clicking outside the modal closes it', async () => {
+    render(<LaunchCustomModal headingText='heading' text='text' />, {
+      wrapper: NiceModal.Provider,
+    });
+
+    const button = screen.getByRole('button', { name: 'text' });
+    fireEvent.click(button);
+
+    const dialog = screen.getByRole('dialog');
+    fireEvent.click(dialog);
+
+    await waitFor(() =>
+      expect(screen.queryByText('heading')).not.toBeInTheDocument(),
+    );
+  });
 });
