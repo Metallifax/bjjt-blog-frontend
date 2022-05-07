@@ -65,24 +65,22 @@ const Login = () => {
         password: form.password,
       };
 
-      await api
-        .post('/api/auth/login', details)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch(({ response: { data } }) => {
-          if (data !== null) {
-            if (Object.keys(data)[0] === 'error') {
-              setResponseErrors([{ param: 'password', msg: data.error }]);
-            } else {
-              let m = data.errors.map((errorMap) => ({
-                param: errorMap.param,
-                msg: errorMap.msg,
-              }));
-              setResponseErrors([...m]);
-            }
-          }
-        });
+      await api.post('/api/auth/login', details).then((res) => {
+        console.log(res.data);
+      });
+      // .catch(({ response: { data } }) => {
+      //   if (data !== null) {
+      //     if (Object.keys(data)[0] === 'error') {
+      //       setResponseErrors([{ param: 'password', msg: data.error }]);
+      //     } else {
+      //       let m = data.errors.map((errorMap) => ({
+      //         param: errorMap.param,
+      //         msg: errorMap.msg,
+      //       }));
+      //       setResponseErrors([...m]);
+      //     }
+      //   }
+      // });
     }
   };
 
