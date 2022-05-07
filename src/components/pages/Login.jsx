@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { Container } from 'react-bootstrap';
+import Cookies from 'js-cookie';
+import { Alert, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import api from '../../api';
 import { useDebounce } from '../../utils';
@@ -12,7 +14,9 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [responseErrors, setResponseErrors] = useState([]);
+  const [alertShow, setAlertShow] = useState(false);
   const debouncedResponseErrors = useDebounce(responseErrors, 500);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (debouncedResponseErrors) {
@@ -21,6 +25,8 @@ const Login = () => {
   }, [debouncedResponseErrors]);
 
   const setField = (field, value) => {
+    setAlertShow(false);
+
     setForm({
       ...form,
       [field]: value,
@@ -68,16 +74,29 @@ const Login = () => {
       await api
         .post('/api/auth/login', details)
         .then((res) => {
-          console.log(res.data);
+          Cookies.set('token', res.data.token);
+          navigate('/');
         })
         .catch(({ response: { data } }) => {
-          console.log(data);
+          setResponseErrors(data);
+          setAlertShow(true);
         });
     }
   };
 
   return (
     <Container className='mt-3'>
+      {alertShow && responseErrors.length > 0 && (
+        <Alert variant='danger' onClose={() => setAlertShow(false)} dismissible>
+          <Alert.Heading>Login failed...</Alert.Heading>
+          <p>Here&apos;s what went wrong:</p>
+          <ListGroup>
+            {responseErrors.map((error) => (
+              <ListGroupItem key={error.msg}>{error.msg}</ListGroupItem>
+            ))}
+          </ListGroup>
+        </Alert>
+      )}
       <h1>Login</h1>
       <FormContainer onSubmit={submitLogin} buttonText='Login'>
         <FormInput
