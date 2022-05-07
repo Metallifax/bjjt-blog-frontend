@@ -70,15 +70,18 @@ const Login = () => {
         .then((res) => {
           console.log(res.data);
         })
+        // COMMENTED UNTIL I FIGURE OUT WHY THE TESTS DONT LIKE THIS
         .catch(({ response: { data } }) => {
-          if (!Array.isArray(data) && Object.keys(data)[0] === 'error') {
-            setResponseErrors([{ param: 'password', msg: data.error }]);
-          } else {
-            let m = data.errors.map((errorMap) => ({
-              param: errorMap.param,
-              msg: errorMap.msg,
-            }));
-            setResponseErrors([...m]);
+          if (data !== null) {
+            if (Object.keys(data)[0] === 'error') {
+              setResponseErrors([{ param: 'password', msg: data.error }]);
+            } else {
+              let m = data.errors.map((errorMap) => ({
+                param: errorMap.param,
+                msg: errorMap.msg,
+              }));
+              setResponseErrors([...m]);
+            }
           }
         });
     }
