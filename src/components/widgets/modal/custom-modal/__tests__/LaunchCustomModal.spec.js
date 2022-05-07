@@ -66,7 +66,7 @@
 //     expect(screen.getByText('child')).toBeInTheDocument();
 //   });
 //
-//   // eslint-disable-next-line max-len
+// eslint-disable-next-line max-len
 //   test("after opening the modal, clicking the 'X' button closes the modal", async () => {
 //     render(<LaunchCustomModal headingText='heading' text='text' />, {
 //       wrapper: NiceModal.Provider,
@@ -84,7 +84,7 @@
 //     );
 //   });
 //
-//   // eslint-disable-next-line max-len
+// eslint-disable-next-line max-len
 //   test('after opening the modal, clicking outside the modal closes it', async () => {
 //     render(<LaunchCustomModal headingText='heading' text='text' />, {
 //       wrapper: NiceModal.Provider,
