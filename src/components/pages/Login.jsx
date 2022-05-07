@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import api from '../../api';
+import { useDebounce } from '../../utils';
 import FormContainer from '../widgets/custom-forms/FormContainer';
 import FormInput from '../widgets/custom-forms/FormInput';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
+  const [responseErrors, setResponseErrors] = useState([]);
+  const debouncedResponseErrors = useDebounce(responseErrors, 500);
+
+  useEffect(() => {
+    if (debouncedResponseErrors) {
+      console.log(debouncedResponseErrors);
+    }
+  }, [debouncedResponseErrors]);
 
   const setField = (field, value) => {
     setForm({
@@ -42,7 +52,7 @@ const Login = () => {
     setField('password', e.target.value);
   };
 
-  const submitLogin = (e) => {
+  const submitLogin = async (e) => {
     e.preventDefault();
 
     const newErrors = findFormErrors();
@@ -55,7 +65,22 @@ const Login = () => {
         password: form.password,
       };
 
-      console.log(details);
+      await api
+        .post('/api/auth/login', details)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(({ response: { data } }) => {
+          if ('error' in data) {
+            setResponseErrors([{ param: data.param, msg: data.error }]);
+          } else {
+            let m = data.errors.map((errorMap) => ({
+              param: errorMap.param,
+              msg: errorMap.msg,
+            }));
+            setResponseErrors([...m]);
+          }
+        });
     }
   };
 
