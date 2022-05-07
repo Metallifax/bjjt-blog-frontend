@@ -65,9 +65,14 @@ const Login = () => {
         password: form.password,
       };
 
-      await api.post('/api/auth/login', details).then((res) => {
-        console.log(res.data);
-      });
+      await api
+        .post('/api/auth/login', details)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       // .catch(({ response: { data } }) => {
       //   if (data !== null) {
       //     if (Object.keys(data)[0] === 'error') {
