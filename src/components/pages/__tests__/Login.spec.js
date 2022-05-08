@@ -1,8 +1,25 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import editorReducer from '../../../features/editor/editorSlice';
+import userReducer from '../../../features/user/userSlice';
 import { fireEvent, renderWithRouter, screen } from '../../../test-utils';
 import Login from '../Login';
 
+const store = configureStore({
+  reducer: { editor: editorReducer, user: userReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
 const localRender = () => {
-  renderWithRouter(<Login />);
+  renderWithRouter(
+    <Provider store={store}>
+      <Login />
+    </Provider>,
+  );
 };
 
 describe('login page tests', () => {
