@@ -1,9 +1,16 @@
 import NiceModal from '@ebay/nice-modal-react';
-import { Button } from 'react-bootstrap';
+import { Button, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import CustomModal from './CustomModal';
 
-const LaunchCustomModal = ({ text, children, headingText, buttonClass }) => {
+const LaunchCustomModal = ({
+  text,
+  type,
+  children,
+  headingText,
+  buttonClass,
+}) => {
   const showCustomModal = () => {
     NiceModal.show(CustomModal, {
       text: text,
@@ -12,7 +19,13 @@ const LaunchCustomModal = ({ text, children, headingText, buttonClass }) => {
     });
   };
 
-  return (
+  const navLinkType = () => (
+    <LinkContainer to='#' onClick={showCustomModal}>
+      <Nav.Link>{text || 'Click me!'}</Nav.Link>
+    </LinkContainer>
+  );
+
+  const defaultType = () => (
     <>
       <Button
         className={buttonClass}
@@ -23,6 +36,8 @@ const LaunchCustomModal = ({ text, children, headingText, buttonClass }) => {
       </Button>
     </>
   );
+
+  return <>{type === 'nav-link' ? navLinkType() : defaultType()}</>;
 };
 
 export default LaunchCustomModal;
