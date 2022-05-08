@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import editorReducer from '../../../features/editor/editorSlice';
-import userReducer from '../../../features/user/userSlice';
+import userReducer, { setIsLoggedIn } from '../../../features/user/userSlice';
 import { renderWithRouter, screen } from '../../../test-utils';
 import Home from '../Home';
 
@@ -22,6 +22,13 @@ const localRender = () => {
   );
 };
 
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+}));
+
 describe('home page tests', () => {
   test('renders the component', () => {
     localRender();
@@ -32,6 +39,22 @@ describe('home page tests', () => {
     localRender();
 
     expect(screen.queryByRole('li')).not.toBeInTheDocument();
+  });
+
+  test('if `loginStore` is false, mockedNavigate is called', () => {
+    store.dispatch(setIsLoggedIn(false));
+
+    localRender();
+
+    expect(mockedNavigate).toHaveBeenCalledWith('/login');
+  });
+
+  test('if `loginStore` is true, mockedNavigate is not called', () => {
+    store.dispatch(setIsLoggedIn(true));
+
+    localRender();
+
+    expect(mockedNavigate).not.toHaveBeenCalled();
   });
 
   // test('getPosts() should return a list of posts', () => {});
