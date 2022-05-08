@@ -23,7 +23,6 @@ const Header = () => {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
-      navigate('/login');
     }
   }, [loginStore, navigate]);
 
@@ -48,7 +47,7 @@ const Header = () => {
             {loggedIn ? (
               <>
                 <LinkContainer to='/'>
-                  <Nav.Link>Home</Nav.Link>
+                  <Nav.Link active={false}>Home</Nav.Link>
                 </LinkContainer>
                 <LaunchCustomModal
                   type='nav-link'
@@ -74,10 +73,10 @@ const Header = () => {
             ) : (
               <>
                 <LinkContainer to='/login'>
-                  <Nav.Link>Login</Nav.Link>
+                  <Nav.Link active={false}>Login</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to='/signup'>
-                  <Nav.Link>Signup</Nav.Link>
+                  <Nav.Link active={false}>Signup</Nav.Link>
                 </LinkContainer>
               </>
             )}

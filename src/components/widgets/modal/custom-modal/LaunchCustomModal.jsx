@@ -21,7 +21,7 @@ const LaunchCustomModal = ({
 
   const navLinkType = () => (
     <LinkContainer to='#' onClick={showCustomModal}>
-      <Nav.Link>{text || 'Click me!'}</Nav.Link>
+      <Nav.Link active={false}>{text || 'Click me!'}</Nav.Link>
     </LinkContainer>
   );
 
