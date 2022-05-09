@@ -23,16 +23,13 @@ const localRender = () => {
 };
 
 describe('login page tests', () => {
-  beforeEach(() => {
-    console.log = jest.fn();
-  });
-
   test('renders the page', () => {
     localRender();
     expect(screen.getByRole('heading')).toHaveTextContent('Login');
   });
 
   test('filling the form and submitting calls `console.log`', () => {
+    console.log = jest.fn();
     localRender();
 
     const emailInput = screen.getByLabelText('Email');
