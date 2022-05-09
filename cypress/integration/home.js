@@ -4,7 +4,7 @@ const checkNavbar = () => {
   cy.get('nav')
     .should('be.visible')
     .within(() => {
-      cy.get('a')
+      cy.get('span')
         .contains('Blogging App')
         .should('contain.text', 'Blogging App');
     });

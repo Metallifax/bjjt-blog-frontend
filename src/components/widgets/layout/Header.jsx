@@ -38,9 +38,7 @@ const Header = () => {
   return (
     <Navbar bg='primary' expand='lg' variant='dark'>
       <Container>
-        <LinkContainer to='/'>
-          <Navbar.Brand>Blogging App</Navbar.Brand>
-        </LinkContainer>
+        <Navbar.Brand>Blogging App</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-0'>
