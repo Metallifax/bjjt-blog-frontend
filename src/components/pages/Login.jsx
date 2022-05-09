@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 
 import Cookies from 'js-cookie';
 import { Alert, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import api from '../../api';
+import { setIsLoggedIn } from '../../features/user/userSlice';
 import { useDebounce } from '../../utils';
 import FormContainer from '../widgets/custom-forms/FormContainer';
 import FormInput from '../widgets/custom-forms/FormInput';
@@ -17,6 +19,7 @@ const Login = () => {
   const [alertShow, setAlertShow] = useState(false);
   const debouncedResponseErrors = useDebounce(responseErrors, 500);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (debouncedResponseErrors) {
@@ -75,6 +78,7 @@ const Login = () => {
         .post('/api/auth/login', details)
         .then((res) => {
           Cookies.set('token', res.data.token);
+          dispatch(setIsLoggedIn(true));
           navigate('/');
         })
         .catch(({ response: { data } }) => {

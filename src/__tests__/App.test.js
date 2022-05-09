@@ -3,28 +3,28 @@ import { Provider } from 'react-redux';
 
 import App from '../App';
 import editorReducer from '../features/editor/editorSlice';
+import userReducer from '../features/user/userSlice';
 import { renderWithRouter, screen } from '../test-utils';
 
+const store = configureStore({
+  reducer: { editor: editorReducer, user: userReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
+const localRender = () => {
+  renderWithRouter(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  );
+};
+
 describe('App tests', () => {
-  const store = configureStore({
-    reducer: { editor: editorReducer },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false,
-      }),
-  });
-
-  test('renders home page on render', () => {
-    renderWithRouter(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-    );
-    expect(screen.getByText(/home!/i)).toBeInTheDocument();
-  });
-
-  test('renders nothing when a bad page is reached', () => {
-    renderWithRouter(<App />, { route: '/bad/route' });
-    expect(screen.getByText(/404 - not found/i)).toBeInTheDocument();
+  test('renders the login page upon initial load', () => {
+    localRender();
+    expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDocument();
   });
 });

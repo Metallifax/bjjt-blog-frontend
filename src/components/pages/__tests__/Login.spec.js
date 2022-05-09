@@ -1,21 +1,35 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import editorReducer from '../../../features/editor/editorSlice';
+import userReducer from '../../../features/user/userSlice';
 import { fireEvent, renderWithRouter, screen } from '../../../test-utils';
 import Login from '../Login';
 
+const store = configureStore({
+  reducer: { editor: editorReducer, user: userReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
 const localRender = () => {
-  renderWithRouter(<Login />);
+  renderWithRouter(
+    <Provider store={store}>
+      <Login />
+    </Provider>,
+  );
 };
 
 describe('login page tests', () => {
-  beforeEach(() => {
-    console.log = jest.fn();
-  });
-
   test('renders the page', () => {
     localRender();
     expect(screen.getByRole('heading')).toHaveTextContent('Login');
   });
 
   test('filling the form and submitting calls `console.log`', () => {
+    console.log = jest.fn();
     localRender();
 
     const emailInput = screen.getByLabelText('Email');
