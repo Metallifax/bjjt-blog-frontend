@@ -73,7 +73,7 @@ const SignUp = () => {
           console.log(res.data);
           Cookies.set('token', res.data.token);
           dispatch(setIsLoggedIn(true));
-          navigate('/');
+          navigate('/verify-email');
         })
         .catch(({ response: { data } }) => {
           console.log('CATCH BLOCK');
