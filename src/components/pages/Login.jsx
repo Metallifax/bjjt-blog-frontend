@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Cookies from 'js-cookie';
 import { Alert, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 import api from '../../api';
 import { setIsLoggedIn } from '../../features/user/userSlice';
-import { useDebounce } from '../../utils';
 import FormContainer from '../widgets/custom-forms/FormContainer';
 import FormInput from '../widgets/custom-forms/FormInput';
 
@@ -17,15 +16,8 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [responseErrors, setResponseErrors] = useState([]);
   const [alertShow, setAlertShow] = useState(false);
-  const debouncedResponseErrors = useDebounce(responseErrors, 500);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (debouncedResponseErrors) {
-      console.log(debouncedResponseErrors);
-    }
-  }, [debouncedResponseErrors]);
 
   const setField = (field, value) => {
     setAlertShow(false);
