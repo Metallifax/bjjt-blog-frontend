@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import { setIsLoggedIn } from '../../../features/user/userSlice';
+import { logoutUser, setIsLoggedIn } from '../../../features/user/userSlice';
 import CustomModal from '../modal/custom-modal/CustomModal';
 import LaunchCustomModal from '../modal/custom-modal/LaunchCustomModal';
 
@@ -29,6 +29,7 @@ const Header = () => {
   const handleLogout = (choice) => {
     if (choice) {
       dispatch(setIsLoggedIn(false));
+      dispatch(logoutUser());
       Cookies.remove('token');
     }
 

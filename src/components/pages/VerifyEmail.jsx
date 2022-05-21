@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import api from '../../api';
-import { setIsLoggedIn } from '../../features/user/userSlice';
+import { setIsLoggedIn, setUser } from '../../features/user/userSlice';
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -17,8 +17,17 @@ const VerifyEmail = () => {
     await api
       .get(`/api/auth/verify/${token}`)
       .then((res) => {
+        const { _id, email, displayName, blogPosts } = res.data.user;
         Cookies.set('token', res.data.token);
         dispatch(setIsLoggedIn(true));
+        dispatch(
+          setUser({
+            id: _id,
+            email,
+            displayName,
+            blogPosts,
+          }),
+        );
         setAuthorized(true);
       })
       .catch((err) => {
