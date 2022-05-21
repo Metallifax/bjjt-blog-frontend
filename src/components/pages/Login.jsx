@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import api from '../../api';
-import { setIsLoggedIn, setUser } from '../../features/user/userSlice';
+import { setIsLoggedIn } from '../../features/user/userSlice';
+import { setGlobalUserData } from '../../utils';
 import FormContainer from '../widgets/custom-forms/FormContainer';
 import FormInput from '../widgets/custom-forms/FormInput';
 
@@ -69,17 +70,9 @@ const Login = () => {
       await api
         .post('/api/auth/login', details)
         .then((res) => {
-          const { _id, email, displayName, blogPosts } = res.data.user;
           Cookies.set('token', res.data.token);
           dispatch(setIsLoggedIn(true));
-          dispatch(
-            setUser({
-              id: _id,
-              email,
-              displayName,
-              blogPosts,
-            }),
-          );
+          setGlobalUserData(res.data.user, dispatch);
           navigate('/');
         })
         .catch(({ response: { data } }) => {
