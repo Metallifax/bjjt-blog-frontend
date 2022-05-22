@@ -69,7 +69,6 @@ const CreatePostEditor = () => {
             title: form.title,
             content: editorState,
             imageUrl: form.imageUrl,
-            dateCreated: Date.now(),
           },
           {
             headers: {
