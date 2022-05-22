@@ -2,29 +2,28 @@ import { useState } from 'react';
 
 import { useModal } from '@ebay/nice-modal-react';
 import MDEditor from '@uiw/react-md-editor';
+import Cookies from 'js-cookie';
 import { Button, Container, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import rehypeSanitize from 'rehype-sanitize';
 
-import { save } from '../../../features/editor/editorSlice';
+import api from '../../../api';
 import './BlogEditor.scss';
 import FormInput from '../custom-forms/FormInput';
 import CustomModal from '../modal/custom-modal/CustomModal';
 
 const CreatePostEditor = () => {
   const [editorState, setEditorState] = useState('hello there!');
-  const dispatch = useDispatch();
   const modal = useModal(CustomModal);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-  const posts = useSelector((state) => state.editor.posts);
+  const user = useSelector((state) => state.user.user);
 
   const findFormErrors = () => {
-    const { name, title, imageUrl } = form;
+    const { title, imageUrl } = form;
     const newErrors = {};
     const editorText = editorState;
 
-    if (!name || name === '') newErrors.name = 'Cannot be blank';
     if (!title || title === '') newErrors.title = 'Cannot be blank';
     if (!imageUrl || imageUrl === '') newErrors.imageUrl = 'Cannot be blank';
     if (!editorText || editorText === '') newErrors.editor = 'Cannot be blank';
@@ -49,40 +48,41 @@ const CreatePostEditor = () => {
     setField('title', e.target.value);
   };
 
-  const changeNameHandler = (e) => {
-    setField('name', e.target.value);
-  };
-
   const changeImageUrlHandler = (e) => {
     setField('imageUrl', e.target.value);
   };
 
-  const savePostHandler = (e) => {
+  const savePostHandler = async (e) => {
     e.preventDefault();
-
-    let id;
-    if (posts.length === 0) {
-      id = 1;
-    } else {
-      id = posts[posts.length - 1].id + 1;
-    }
 
     const newErrors = findFormErrors();
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else if (editorState) {
-      const post = {
-        id,
-        name: form.name,
-        title: form.title,
-        imageUrl: form.imageUrl,
-        editorState,
-        dateCreated: Date.now(),
-      };
+      const token = Cookies.get('token');
 
-      dispatch(save(post));
-      modal.hide();
+      return await api
+        .post(
+          `/api/user/${user.id}/post`,
+          {
+            title: form.title,
+            content: editorState,
+            imageUrl: form.imageUrl,
+            dateCreated: Date.now(),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          modal.hide();
+        });
     } else {
       // Temporary thing, will add reactivity later
       console.log('Editor content cannot be empty!');
@@ -101,15 +101,6 @@ const CreatePostEditor = () => {
             formGroupClass='form-group--container'
             isInvalid={!!errors.title}
             errorMessage={errors.title}
-          />
-          <FormInput
-            id='name'
-            onChange={(e) => changeNameHandler(e)}
-            label='Name'
-            placeholder='Enter your name!'
-            formGroupClass='form-group--container'
-            isInvalid={!!errors.name}
-            errorMessage={errors.name}
           />
           <FormInput
             id='imageUrl'
